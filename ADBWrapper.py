@@ -12,25 +12,25 @@ class ADBWrapper:
         if latestFile:
             fileName = self.getLatestFileName(self.androidCameraPath)
             filePath = self.androidCameraPath + "/" + fileName
-            os.system(f"adb pull {filePath} {path}")
+            os.system('adb pull {filePath} {path}'.format(filePath = filePath, path = path))
         else:        
-            os.system(f"adb pull {self.androidCameraPath} {path}")
+            os.system("adb pull {androidCameraPath} {path}".format(androidCameraPath = self.androidCameraPath, path = path))
 
     def copyScreenShots(self, path, latestFile):
         if latestFile:
             fileName = self.getLatestFileName(self.androidScreenShotsPath)
             filePath = self.androidScreenShotsPath + "/" + fileName
-            os.system(f"adb pull {filePath} {path}")
+            os.system("adb pull {filePath} {path}".format(filePath = filePath, path = path))
         else:
-            os.system(f"adb pull {self.androidScreenShotsPath} {path}")        
+            os.system("adb pull {androidScreenShotsPath} {path}".format(androidScreenShotsPath = self.androidScreenShotsPath, path = path))        
 
     def getLatestFileName(self, path):
-        commands = f"""
+        commands = """
             adb shell
-            cd { path }
+            cd {path}
             ls -latr | tail -1 | awk '{{ print  $8 }}' 
             exit
-        """
+        """.format(path = path)
 
         process = subprocess.Popen('/bin/bash', stdin=subprocess.PIPE, stdout=subprocess.PIPE)
         out, err = process.communicate(commands.encode('utf-8'))
