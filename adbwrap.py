@@ -17,6 +17,6 @@ adbWrapper = ADBWrapper()
  
 if type == 'camera':
     adbWrapper.copyCameraPhotos(path, latestFile)
-elif type == 'ss':
+else:
     adbWrapper.copyScreenShots(path, latestFile)
 
